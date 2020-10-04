@@ -1,0 +1,25 @@
+// Example of a simple SendActivity step
+var greetUserDialog = new AdaptiveDialog("greetUserDialog");
+greetUserDialog.Triggers.Add(new OnIntent()
+{
+    Intent = "greetUser", 
+    Actions = new List<Dialog>() {
+        new SendActivity("Hello")
+    }
+});
+
+// Example that includes reference to property on bot state.
+var greetUserDialog = new AdaptiveDialog("greetUserDialog");
+greetUserDialog.Triggers.Add(new OnIntent()
+{
+    Intent = "greetUser",
+    Actions = new List<Dialog>()
+    {
+        new TextInput()
+        {
+            Property = "user.name",
+            Prompt = new ActivityTemplate("What is your name?")
+        },
+        new SendActivity("Hello, ${user.name}")
+    }
+});
